@@ -1,4 +1,4 @@
 TrainingDay
 ===========
 
-Small program about golang
+Small program using golang
