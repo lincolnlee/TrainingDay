@@ -18,13 +18,7 @@ func setting(w http.ResponseWriter, r *http.Request) {
 			AddSettingData(r.FormValue("rssName"), r.FormValue("rssUrl"))
 		} else if r.FormValue("crawl") == "crawl" {
 			//fmt.Println("crawl ok")
-			RssSourceLs = GetAllSettingData()
-			ch := make(chan int, 2)
-			for i, v := range *RssSourceLs {
-				ch <- i
-				go crawlRss(v.RssUrl, int32(v.Id), ch)
-			}
-
+			go dealCrawl(RssSourceLs)
 		}
 	} else {
 		if r.FormValue("action") == "del" {
@@ -39,4 +33,24 @@ func setting(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("resource/setting.gtpl")
 	checkError(err)
 	t.Execute(w, RssSourceLs)
+}
+
+func dealCrawl(RssSourceLs *[]RssSource) {
+	RssSourceLs = GetAllSettingData()
+	ch := make(chan int, 2)
+	for i, v := range *RssSourceLs {
+		ch <- i
+		go crawlRss(v.RssUrl, int32(v.Id), ch)
+		fmt.Println(len(ch))
+	}
+
+	/*for {
+		select {
+		case c <- x:
+
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}*/
 }

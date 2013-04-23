@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/xml"
-	//"fmt"
+	"fmt"
 	//"io"
 	iconv "github.com/djimenez/iconv-go"
 	"hash/adler32"
@@ -51,6 +51,17 @@ type rss struct {
 }
 
 func crawlRss(rurl string, rssid int32, ch chan int) {
+
+	defer func() {
+		if x := recover(); x != nil {
+			<-ch
+			fmt.Println(rssid, "panic")
+			return
+		} else {
+			<-ch
+			fmt.Println(rssid, "ok")
+		}
+	}()
 	con := rss{}
 	var ret *http.Response
 	var err1 error
@@ -106,8 +117,6 @@ func crawlRss(rurl string, rssid int32, ch chan int) {
 			}
 		}
 	}
-
-	<-ch
 
 	//fmt.Println(con)
 }
