@@ -14,5 +14,5 @@ func init() {
 }
 
 func handle(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<html><body>Hello, GAE. 这是李林的第一个Golang写的Web页面～！</body></html>")
+	fmt.Fprint(w, "<html><body>Hello, GAE. 这是李林的第一个Golang写的Web页面～！!</body></html>")
 }

@@ -39,7 +39,8 @@ func main() {
 		}
 
 		if strbyte == nil {
-			fmt.Println("The End" + time.Now().String())
+			fmt.Println("The End")
+			fmt.Println(time.Now().String())
 			return
 		}
 
@@ -66,13 +67,13 @@ func main() {
 		_, ok := domainMap[rest]
 		if ok {
 
-			domainMap[rest].WriteString(str)
+			domainMap[rest].WriteString(str + "\n")
 
 		} else {
 			fret, _ := os.Create(rest + ".log")
 			domainMap[rest] = fret
 			defer domainMap[rest].Close()
-			domainMap[rest].WriteString(str)
+			domainMap[rest].WriteString(str + "\n")
 		}
 	}
 }
