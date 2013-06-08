@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<me ip="127.0.0.1" HttpPort="8004" TCPPort="18004"/>
+	<host ip="127.0.0.1" HttpPort="8001" TCPPort="18001"/>
+	<host ip="127.0.0.1" HttpPort="8002" TCPPort="18002"/>
+	<host ip="127.0.0.1" HttpPort="8003" TCPPort="18003"/>
+</root>
