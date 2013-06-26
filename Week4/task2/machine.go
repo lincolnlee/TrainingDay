@@ -121,9 +121,9 @@ func SendFile(rwc net.Conn) {
 		}
 
 		fmt.Println(byteAmount)
-		fmt.Println(p[len(p)-64 : len(p)])
+		fmt.Println(p[(byteAmount-64):byteAmount])
 
-		_, err = rwc.Write(p)
+		_, err = rwc.Write(p[0:byteAmount])
 		checkError(err)
 	}
 
@@ -223,7 +223,7 @@ func CustomCmd(cmd Command) bool {
 				checkError(err)
 				fmt.Println("file size:", length)
 
-				fret, _ := os.Create("iploc")
+				fret, _ := os.Create("iploc.dat")
 				defer fret.Close()
 
 				data := make([]byte, length)
